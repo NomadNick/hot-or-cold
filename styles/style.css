@@ -46,7 +46,7 @@ a {
 }
 
 ul li {	
-	display: inline;
+	display:inline-block;
 }
 
 /*---------------------------------------------------------------------------------
@@ -297,7 +297,7 @@ input:focus {
 }
 
 ul.guessBox {
-	height: 80px;
+	height: auto;
 	margin: 10px auto 0;
 	background: #11a8ab;
 	padding: 0.5em;

@@ -1,5 +1,4 @@
-
-$(document).ready(function(){
+	$(document).ready(function(){
 	
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
@@ -15,28 +14,41 @@ $(document).ready(function(){
 
 });
 
-	var guessedNumber = $('userGuess').val();
+	//Store the number that the user inputs in text box
+	var guessedNumber;
+	$('#guessButton').on('click', function(event) {
+		guessedNumber = $('#userGuess').val();
+		
+		$('#count').html(parseInt($('#count').html(), 10)+1);
+		$('#guessList').append('<li>'+guessedNumber+'</li>');
+		$('#guessList').append(guessFeedback());
+		$('#userGuess').val('');
+		event.preventDefault();
+	});
 
+	//Generates a number between 1 and 100 as the number for the user to guess
   	var generatedNumber = Math.floor((Math.random() * 100) + 1);
 
+  	//Function to compare the guessedNumber against the generatedNumber and append feedback to feedback div
   	var guessFeedback = function() {
   		if (Math.abs(guessedNumber - generatedNumber) >= 50) {
-  			alert('Ice Cold!');
+  			$('#guessList').append("Ice Cold!");
   		}
   		else if (Math.abs(guessedNumber - generatedNumber) < 50 && Math.abs(generatedNumber - guessedNumber) > 30) {
-  			alert('Cold!');
+  			$('#guessList').append("Cold!");
   		}
   		else if (Math.abs(guessedNumber - generatedNumber) <= 30 && Math.abs(generatedNumber - guessedNumber) >= 20) {
-  			alert('Warm!');
+  			$('#guessList').append("Warm!");
   		}
   		else if (Math.abs(guessedNumber - generatedNumber) < 20 && Math.abs(generatedNumber - guessedNumber) > 10) {
-  			alert('Hot!');
+  			$('#guessList').append("Hot!");
+  		}
+  		else if (Math.abs(guessedNumber - generatedNumber) < 10 && Math.abs(generatedNumber - guessedNumber) > 0) {
+  			$('#guessList').append("Very Hot!");
   		}
   		else {
-  			alert('Very hot!');
+  			$('#guessList').append("You Win!");
   		}
   	};
-  	$('guessButton').on(click, function () {
-  		$('#count').html(parseInt($('#count').html(), 10)+1);
-  	})
+
   	
